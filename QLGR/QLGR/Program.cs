@@ -16,7 +16,7 @@ namespace QLGR
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(frmDN.Instance);
+            Application.Run(frmMain.Instance);
         }
     }
 }
