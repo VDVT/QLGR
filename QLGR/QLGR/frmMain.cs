@@ -469,6 +469,7 @@ namespace QLGR
         //Add button
         private void btnHX1_Click(object sender, EventArgs e)
         {
+            this.txtTHX.Text = "";
             this.btnHX1.Enabled = false;
             this.btnHX2.Enabled = false;
             this.btnHX3.Enabled = false;
@@ -497,11 +498,16 @@ namespace QLGR
         private void btnHX3_Click(object sender, EventArgs e)
         {
             SQL_HieuXe _hx = new SQL_HieuXe();
+            if (this.txtMHX.Text == "" || this.txtTHX.Text == "")
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!", "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             _hx.SMaHX = txtMHX.Text;
             _hx.STenHX = txtTHX.Text;
             if (hx.UpdateHX(_hx) == true)
             {
-                MessageBox.Show("Sửa thành công!", "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Sửa thành công Nhân viên " + _hx.STenHX , "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 gwHX.DataSource = hx.GetData();
             }
             else
@@ -512,11 +518,16 @@ namespace QLGR
         private void btnHX4_Click(object sender, EventArgs e)
         {
             SQL_HieuXe _hx = new SQL_HieuXe();
+            if (this.txtMHX.Text == "" || this.txtTHX.Text == "")
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!", "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             _hx.SMaHX = txtMHX.Text;
             _hx.STenHX = txtTHX.Text;
             if (hx.InsertHX(_hx) == true)
             {
-                MessageBox.Show("Thêm thành công!", "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Thêm thành công Hiệu xe " + _hx.STenHX, "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 gwHX.DataSource = hx.GetData();
             }
             else
@@ -562,6 +573,8 @@ namespace QLGR
         //Add button
         private void btnTC1_Click(object sender, EventArgs e)
         {
+            this.txtTTC.Text = "";
+            this.txtGT.Text = "";
             this.btnTC1.Enabled = false;
             this.btnTC2.Enabled = false;
             this.btnTC3.Enabled = false;
@@ -590,12 +603,17 @@ namespace QLGR
         private void btnTC3_Click(object sender, EventArgs e)
         {
             SQL_DichVu dv = new SQL_DichVu();
+            if (this.txtMTC.Text == "" || this.txtTTC.Text == "" || this.txtGT.Text == "")
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!", "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             dv.SMaTC = this.txtMTC.Text;
             dv.STenTC = this.txtTTC.Text;
             dv.SGiaTien = Int32.Parse(this.txtGT.Text.Replace(",", ""));
             if (tc.UpdateDV(dv) == true)
             {
-                MessageBox.Show("Sửa thành công!", "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Sửa thành công dịch vụ " + dv.STenTC, "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 gwDV.DataSource = tc.GetData();
             }
             else
@@ -606,12 +624,17 @@ namespace QLGR
         private void btnTC4_Click(object sender, EventArgs e)
         {
             SQL_DichVu dv = new SQL_DichVu();
+            if(this.txtMTC.Text == "" || this.txtTTC.Text == "" || this.txtGT.Text == "")
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!", "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             dv.SMaTC = this.txtMTC.Text;
             dv.STenTC = this.txtTTC.Text;
             dv.SGiaTien = Int32.Parse(this.txtGT.Text.Replace(",",""));
             if (tc.InsertDV(dv) == true)
             {
-                MessageBox.Show("Thêm thành công!", "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Thêm thành công dịch vụ " + dv.STenTC, "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 gwDV.DataSource = tc.GetData();
             }
             else
@@ -658,6 +681,9 @@ namespace QLGR
         //Add button
         private void btnVT1_Click(object sender, EventArgs e)
         {
+            this.txtTVT.Text = "";
+            this.txtDGVT.Text = "";
+            this.txtSLVT.Text = "";
             this.btnVT1.Enabled = false;
             this.btnVT2.Enabled = false;
             this.btnVT3.Enabled = false;
@@ -687,13 +713,18 @@ namespace QLGR
         private void btnVT3_Click(object sender, EventArgs e)
         {
             SQL_VatTu _vt = new SQL_VatTu();
+            if(this.txtMVT.Text == "" || this.txtTVT.Text == "" || this.txtSLVT.Text == "" || this.txtDGVT.Text == "")
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!", "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             _vt.SMaVT = this.txtMVT.Text;
             _vt.STenVT = this.txtTVT.Text;
             _vt.SSL = Int32.Parse(this.txtSLVT.Text);
             _vt.SDonGia = Int32.Parse(this.txtDGVT.Text.Replace(",", ""));
             if (vt.UpdateVT(_vt) == true)
             {
-                MessageBox.Show("Sửa thành công!", "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Sửa thành công vật tư " + _vt.STenVT , "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 gwVT.DataSource = vt.GetData();
             }
             else
@@ -704,13 +735,18 @@ namespace QLGR
         private void btnVT4_Click(object sender, EventArgs e)
         {
             SQL_VatTu _vt = new SQL_VatTu();
+            if (this.txtMVT.Text == "" || this.txtTVT.Text == "" || this.txtSLVT.Text == "" || this.txtDGVT.Text == "")
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!", "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
             _vt.SMaVT = this.txtMVT.Text;
             _vt.STenVT = this.txtTVT.Text;
             _vt.SSL = Int32.Parse(this.txtSLVT.Text);
             _vt.SDonGia = Int32.Parse(this.txtDGVT.Text.Replace(",", ""));
             if (vt.InsertVT(_vt) == true)
             {
-                MessageBox.Show("Thêm thành công!", "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Thêm thành công vật tư " + _vt.STenVT, "Thông Báo!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 gwVT.DataSource = vt.GetData();
             }
             else
