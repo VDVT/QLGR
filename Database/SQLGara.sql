@@ -214,3 +214,15 @@ as
 		where MaVT = @maVt
 
 	end
+
+
+/* Proc check login */
+create proc GDT_USER
+@us varchar(50),
+@p varchar(50)
+as
+begin
+SELECT 1
+FROM     Users
+WHERE  (MatKhau = @p COLLATE SQL_Latin1_General_CP1_CS_AS) AND (MaNV = @us COLLATE SQL_Latin1_General_CP1_CS_AS)
+end
