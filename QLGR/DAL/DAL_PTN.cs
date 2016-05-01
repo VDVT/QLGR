@@ -15,8 +15,8 @@ namespace DAL
         {
             string strSQL = "GetData";
             //string sx = "@MaPTN";
-            string pNames = "@tableName";
-            string pValues = "Xe";
+            string[] pNames = {"@tableName"};
+            string[] pValues = {"Xe"};
             return con.GetData(strSQL, pNames, pValues);
         }
 

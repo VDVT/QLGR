@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using DAL;
-
+using Entity;
 namespace BUS
 {
     public class Bus_Users
@@ -15,6 +15,10 @@ namespace BUS
         public DataTable GetData()
         {
             return us.SelectAll();
+        }
+        public DataTable GetUSER(SQL_Users EUSER)
+        {
+            return us.SelectUser(EUSER);
         }
 
     }

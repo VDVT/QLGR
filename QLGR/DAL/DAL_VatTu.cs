@@ -15,8 +15,8 @@ namespace DAL
         {
             string strSQL = "GetData";
             //string sx = "@MaVT";
-            string pNames = "@tableName";
-            string pValues = "VatTu";
+            string[] pNames = {"@tableName"};
+            string[] pValues = {"VatTu"};
             return con.GetData(strSQL, pNames, pValues);
         }
         public bool InsertVT(SQL_VatTu vt)

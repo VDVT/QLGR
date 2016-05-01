@@ -772,6 +772,11 @@ namespace QLGR
 
         }
 
+        private void lblDichVu_Click(object sender, EventArgs e)
+        {
+
+        }
+
         
     }
 }

@@ -222,7 +222,17 @@ create proc GDT_USER
 @p varchar(50)
 as
 begin
-SELECT 1
+SELECT 1 as Temp
 FROM     Users
-WHERE  (MatKhau = @p COLLATE SQL_Latin1_General_CP1_CS_AS) AND (MaNV = @us COLLATE SQL_Latin1_General_CP1_CS_AS)
+WHERE  (MaNV = @us COLLATE SQL_Latin1_General_CP1_CS_AS) AND (MatKhau = @p COLLATE SQL_Latin1_General_CP1_CS_AS)
+end
+
+create proc GDT_Hieuxe
+@mahx varchar(50),
+@tenhx varchar(50)
+as
+begin
+SELECT MaHX, TenHX 
+FROM     HieuXe
+WHERE  (MaHX = @mahx ) AND (TenHX = @tenhx)
 end

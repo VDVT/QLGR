@@ -17,6 +17,10 @@ namespace BUS
         {
             return hx.SelectAll();
         }
+        public DataTable GetHieuxe(SQL_HieuXe _hx)
+        {
+            return hx.SelectHieuXE(_hx);
+        }
         public bool InsertHX(SQL_HieuXe _hx)
         {
             return hx.InsertHX(_hx);

@@ -7,12 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Data;
+using System.Data.SqlClient;
+using DAL;
+using Entity;
+using BUS;
 namespace QLGR
 {
     public sealed partial class frmDN : Form
     {
-
+        
         #region Singleton
         frmDN()
         {
@@ -34,10 +38,29 @@ namespace QLGR
             internal static readonly frmDN instance = new frmDN();
         }
         #endregion
+        Bus_Users BUser = new Bus_Users();
+        SQL_Users EUser = new SQL_Users();
         private void logInBut_Click(object sender, EventArgs e)
         {
-            frmMain.Instance.Show();
-            this.Hide();
+            EUser.SMaNV = userName.Text;
+            EUser.SMatKhau = passWord.Text;
+            DataTable dt = new DataTable();
+            dt = BUser.GetUSER(EUser);
+            try
+            {
+
+                if (dt.Rows[0]["Temp"].ToString() == "1")
+                {
+                    MessageBox.Show("Đăng nhập thành công","Thông Báo");
+                    frmMain.Instance.Show();
+                    this.Hide();
+                }
+               
+            }
+            catch
+            {
+                MessageBox.Show("NHU CAC");
+            }
         }
 
         private void frmDN_FormClosing(object sender, FormClosingEventArgs e)

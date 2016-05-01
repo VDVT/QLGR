@@ -14,11 +14,20 @@ namespace DAL
         public DataTable SelectAll()
         {
             string strSQL = "GetData";
-            string pNames = "@tableName";
+            string[] pNames = {"@tableName"};
             //string sx = "@MaHX";
-            string pValues = "HieuXe";
+            string[] pValues = {"HieuXe"};
             return con.GetData(strSQL, pNames, pValues);
         }
+        public DataTable SelectHieuXE(SQL_HieuXe Ehieuxe)
+        {
+            string strSQL = "GDT_Hieuxe";
+            string[] pNames = { "@mahx","@tenhx" };
+            //string sx = "@MaHX";
+            string[] pValues = { Ehieuxe.SMaHX,Ehieuxe.STenHX};
+            return con.GetData(strSQL, pNames, pValues);
+        }
+
         public bool InsertHX(SQL_HieuXe hx)
         {
             try

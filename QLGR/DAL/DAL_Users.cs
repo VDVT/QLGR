@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using Entity;
 
 namespace DAL
 {
@@ -14,10 +15,16 @@ namespace DAL
         {
             string strSQL = "GetData";
             //string sx = "@MaNV";
-            string pNames = "@tableName";
-            string pValues = "Users";
+            string[] pNames = {"@tableName"};
+            string[] pValues = {"Users"};
             return con.GetData(strSQL, pNames, pValues);
         }
-
+        public DataTable SelectUser(SQL_Users EUser)
+        {
+            string strSQL = "GDT_USER";
+            string[] pNames = {"@us","@p"};
+            string[] pValues = {EUser.SMaNV,EUser.SMatKhau};
+            return con.GetData(strSQL, pNames, pValues);
+        }
     }
 }

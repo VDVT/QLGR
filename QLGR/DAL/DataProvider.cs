@@ -15,10 +15,18 @@ namespace DAL
         DataTable dt;
         public static void Open()
         {
-            if (Ketnoi.connect == null)
-                Ketnoi.connect = new SqlConnection("Data Source=(local);Initial Catalog=QLGR;Integrated Security=SSPI;");
-            if (Ketnoi.connect.State != ConnectionState.Open)
-                Ketnoi.connect.Open();
+            try
+            {
+                if (Ketnoi.connect == null)
+                    // Ketnoi.connect = new SqlConnection("Data Source=(local);Initial Catalog=QLGR;Integrated Security=SSPI;");
+                    Ketnoi.connect = new SqlConnection(@"Data Source=(local);Initial Catalog=QLGR;Integrated Security=SSPI;");
+                if (Ketnoi.connect.State != ConnectionState.Open)
+                    Ketnoi.connect.Open();
+            }
+            catch (System.Data.SqlClient.SqlException sqlException) {
+                Console.WriteLine(sqlException.Message);
+            }
+            
         }
         public void Close()
         {
@@ -29,7 +37,7 @@ namespace DAL
             }
         }
 
-        public DataTable GetData(string strSQL, string pNames, object pValues)
+        public DataTable GetData(string strSQL, string[] pNames, object[] pValues)
         {
             try
             {
@@ -37,8 +45,12 @@ namespace DAL
                 cmd = new SqlCommand(strSQL, connect);
                 cmd.CommandType = CommandType.StoredProcedure;
                 //cmd.Parameters.Add(sx);
-                cmd.Parameters.Add(pNames, SqlDbType.VarChar).Value = pValues;
-                var da = new SqlDataAdapter(cmd);
+                SqlDataAdapter da = new SqlDataAdapter();
+                for (int i = 0; i < pNames.Length; i++)
+                {
+                    cmd.Parameters.Add(pNames[i], SqlDbType.VarChar).Value = pValues[i];
+                    da = new SqlDataAdapter(cmd);
+                }
                 dt = new DataTable();
                 da.Fill(dt);
                 Close();
